@@ -23,10 +23,10 @@ class AskGradlePlugin : Plugin<Project> {
             it.doLast {
                 val shadowJar = project.tasks.findByName("shadowJar")
                 val jarPath = shadowJar?.outputs?.files?.singleFile
-                println("Jar path: $jarPath")
+                println("Launching ask with test jar: $jarPath")
                 if (jarPath != null) {
                     project.exec {
-                        it.commandLine("java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005", "-jar", "/opt/homebrew/lib/ask-0.12.jar", "--test-plugin", jarPath.absolutePath)
+                        it.commandLine("ask", "--test-plugin", jarPath.absolutePath)
                     }
                 }
             }
