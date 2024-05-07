@@ -23,12 +23,8 @@ class AskGradlePlugin : Plugin<Project> {
             it.doLast {
                 val shadowJar = project.tasks.findByName("shadowJar")
                 val jarPath = shadowJar?.outputs?.files?.singleFile
-                println("Launching ask with test jar: $jarPath")
-                if (jarPath != null) {
-                    project.exec {
-                        it.commandLine("ask", "--test-plugin", jarPath.absolutePath)
-                    }
-                }
+                println("To test the plugin, run: 'ask --test-plugin ${jarPath?.absolutePath}'")
+                println("Ensure your debugger is set to connect on port 5005 (or your configured port)")
             }
         }
 
